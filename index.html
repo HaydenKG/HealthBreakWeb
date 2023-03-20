@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Health break</title>
+</head>
+
+<body>
+  <main>
+    <h3 id="heading">👋 Need a break?</h3>
+    <div id="hiddenSettingsPanel">
+      <img class="settingsBtn" id="settingsIcon" title="Settings"
+        src="./media/images/settingsIcon.png" \>
+      <img class="settingsBtn" id="pauseExtensionIcon" title="Pause extension"
+        src="./media/images/pauseIcon.png" \>
+      <span id="arrowDown">&#9495;</span>
+    </div>
+    <div class="slidingContainer">
+      <div class="contentPanel" id="eyeClose">
+        <p>Close your eyes for the duration of a deep breath</p>
+      </div>
+      <div class="contentPanel" id="eyeDistance">
+        <p>Look into the distance for 20 seconds and follow an object with your eyes if you can</p>
+        <button class="primary_btn" id="lookDistanceTimerBtn">Start</button>
+      </div>
+      <div class="contentPanel" id="breathingCycle">
+        <p>Up for a 1:2 (inhale:exhale) breathing cycle?</p>
+        <div class="breathingIndicatorBar"></div>
+        <button class="primary_btn" id="breathingCycleBtn">Start</button>
+      </div>
+      <div class="contentPanel" id="wristShake">
+        <p>Shake your wrists for a few seconds</p>
+      </div>
+      <div class="contentPanel">
+        <p>Thank you for taking time for your health</p>
+      </div>
+    </div>
+    <div id="buttonContainer">
+      <button class="secondary_btn" id="cancelBtn">I'm good for now</button>
+      <button class="primary_btn" id="nextBtn">Next</button>
+    </div>
+  </main>
+  <div id="pauseExtensionPanel" class="hiddenPanel">
+    <button class="secondary_btn" id="minimizePauseExtensionPanelBtn">_</button>
+    <h3>Pause <span>Health</span> break</h3>
+    For
+    <form id="pauseExtensionForm">
+      <label>60 min</label>
+      <input type="radio" name="pauseExtension" value="60" checked>
+      <label>90 min</label>
+      <input type="radio" name="pauseExtension" value="90">
+      <label>whole day</label>
+      <input type="radio" name="pauseExtension" value="wholeDay">
+    </form>
+    <button class="secondary_btn" id="setPauseExtBtn">set</button>
+  </div>
+  <div id="setupPanel" class="hiddenPanel showPanel">
+    <h3>Welcome to the setup of <br><span>Health</span> break</h3>
+    <div class="slidingContainer">
+      <div class="contentPanel">
+        <p>Do you want to customize the extension?</p>
+        <button class="secondary_btn" id="customizeSetupBtn">Customize</button>
+        <button class="secondary_btn" id="defaultSetupBtn">Default</button>
+        <p>You can always change things in the settings afterwards</p>
+      </div>
+      <div class="contentPanel">
+        <p>Which health exercises do you want to do?</p>
+        <form id="exerciseSelection">
+          <label>Eye calming</label>
+          <input type="checkbox" name="eyeClose" checked>
+          <label for="">Sight training</label>
+          <input type="checkbox" name="eyeDistance" checked>
+          <label for="">Wrist shaking</label>
+          <input type="checkbox" name="wristShake" checked>
+          <label for="">Breath exercise</label>
+          <input type="checkbox" name="breathingCycle" checked>
+        </form>
+      </div>
+      <div class="contentPanel">
+        <p>What is the intervall you want to be reminded by?</p>
+        <form id="intervalSetup">
+          <label>1 min</label>
+          <input type="radio" name="interval" value="1" checked>
+          <label>40 min</label>
+          <input type="radio" name="interval" value="40" checked>
+          <label>60 min</label>
+          <input type="radio" name="interval" value="60" checked>
+          <label>90 min</label>
+          <input type="radio" name="interval" value="90">
+          <label>120 min</label>
+          <input type="radio" name="interval" value="wholeDay">
+        </form>
+      </div>
+      <div class="contentPanel">
+        <p>Which way of notification do you prefer?</p>
+        <form id="notificationSetup">
+          <label>Popup</label>
+          <input type="radio" name="notification" value="Popup" checked>
+          <label>Icon</label>
+          <input type="radio" name="notification" value="Icon">
+        </form>
+      </div>
+    </div>
+    <button id="setupNextButton" class="primary_btn" style="display: none;">Next</button>
+  </div>
+  <script src="./JS/setupHelper.js"></script>
+  <script src="./JS/main.js"></script>
+  <!-- because inline js is not allowed-->
+</body>
+
+</html>

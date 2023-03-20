@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;1,400&display=swap');
+
+:root {
+    --primColor: #1BB509;
+    --secondColor: #B57700;
+}
+
+html,
+body {
+    font-family: 'Rubik', sans-serif;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+    position: relative;
+    animation: smoothFadeIn .5s linear;
+    font-size: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes smoothFadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+main {
+    display: grid;
+    grid-template-rows: 1fr 3fr 1fr;
+    align-items: center;
+    justify-items: center;
+    position: relative;
+    height: 60%;
+    width: 50%;
+    padding: 0 3px;
+}
+
+span {
+    color: var(--primColor);
+}
+
+button {
+    cursor: pointer;
+    font-size: inherit;
+}
+
+button:disabled {
+    color: gray;
+    cursor: not-allowed;
+    border-color: gray;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 10px;
+}
+
+input {
+    cursor: pointer;
+}
+
+#hiddenSettingsPanel {
+    height: 80px;
+    width: 50px;
+    background-color: var(--secondColor);
+    transform: translateY(-242%);
+    position: absolute;
+    right: 5px;
+    top: 0;
+    display: grid;
+    padding: 10px 0;
+    transition: transform .2s;
+    border-radius: 8px;
+}
+
+#hiddenSettingsPanel:hover{
+    transform: translateY(-160%);
+}
+
+#arrowDown {
+    rotate: -45deg;
+    color: #fff;
+    position: absolute;
+    bottom: -8px;
+    left: 29%;
+    display: block;
+}
+
+#hiddenSettingsPanel:hover #arrowDown {
+    filter: opacity(0);
+    display: none;
+    color: #B57700;
+}
+
+.settingsBtn {
+    justify-self: center;
+    align-self: center;
+    width: 30px;
+    height: auto;
+    cursor: pointer;
+}
+
+.slidingContainer {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    justify-self: flex-start;
+    scroll-snap-type: x mandatory;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+.contentPanel {
+    flex: 0 0 100%;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: center;
+}
+
+.contentPanel > p {
+    padding: 0 2px;
+}
+
+#buttonContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 70%;
+    grid-gap: 5px;
+}
+
+.primary_btn {
+    border: 2px solid var(--primColor);
+    border-radius: 8px;
+    color: var(--primColor);
+    padding: 5px 10px;
+    background: none;
+    transition: all .3s;
+    font-size: 1.2rem;
+}
+
+.primary_btn:hover {
+    box-shadow: 0px 2px 4px 0px #7F646464
+}
+
+.secondary_btn {
+    text-decoration: underline;
+    background: none;
+    border: none;
+}
+
+.secondary_btn:hover {
+    text-decoration-color: var(--primColor);
+}
+
+.secondary_btn + .secondary_btn {
+    margin: 5px;
+}
+
+.breathingIndicatorBar {
+    background-color: var(--primColor);
+    height: 10px;
+    margin: 5px 0 15px 0;
+    width: 50px;
+    border-radius: 8px;
+    animation: breathingCycle 9s 5 linear;
+    animation-play-state: paused;
+}
+
+@keyframes breathingCycle {
+    0% {
+        width: 50px;
+    }
+
+    33% {
+        width: 150px;
+    }
+
+    100% {
+        width: 50px;
+    }
+}
+
+.hiddenPanel {
+    transition: all .5s;
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: -2;
+    background-color: #fff;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.showPanel {
+    z-index: 2;
+    opacity: 1;
+    visibility: visible;
+    transition: all .3s;
+}
+
+#minimizePauseExtensionPanelBtn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 1.4rem;
+}
