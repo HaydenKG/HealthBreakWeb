@@ -11,14 +11,11 @@
 
 <body>
   <main>
-    <h3 id="heading">👋 Need a break?</h3>
     <div id="hiddenSettingsPanel">
-      <img class="settingsBtn" id="settingsIcon" title="Settings"
-        src="./media/images/settingsIcon.png" \>
-      <img class="settingsBtn" id="pauseExtensionIcon" title="Pause extension"
-        src="./media/images/pauseIcon.png" \>
-      <span id="arrowDown">&#9495;</span>
+      <img class="settingsBtn" id="settingsIcon" title="Settings" src="./media/images/settingsIcon.png" \>
+      <img class="settingsBtn" id="pauseExtensionIcon" title="Pause extension" src="./media/images/pauseIcon.png" \>
     </div>
+    <h3 id="heading">👋 Need a break?</h3>
     <div class="slidingContainer">
       <div class="contentPanel" id="eyeClose">
         <p>Close your eyes for the duration of a deep breath</p>
@@ -35,14 +32,21 @@
       <div class="contentPanel" id="wristShake">
         <p>Shake your wrists for a few seconds</p>
       </div>
+      <div class="contentPanel" id="relaxJaw">
+        <p>Relax your jaw by moving it around a bit</p>
+      </div>
+      <div class="contentPanel" id="rotateShoulders">
+        <p>Slowly role your shoulders back 3 times</p>
+      </div>
+      <div class="contentPanel" id="alignPosture">
+        <p>Straigthen your posture (if you can by aligning yourself with a wall)</p>
+      </div>
       <div class="contentPanel">
         <p>Thank you for taking time for your health</p>
+        <p>Your next break time is at <span id="nextBreakTime">-</span></p>
       </div>
     </div>
-    <div id="buttonContainer">
-      <button class="secondary_btn" id="cancelBtn">I'm good for now</button>
-      <button class="primary_btn" id="nextBtn">Next</button>
-    </div>
+    <button onClick="scrollToNextSection()" class="primary_btn" id="nextBtn">Next</button>
   </main>
   <div id="pauseExtensionPanel" class="hiddenPanel">
     <button class="secondary_btn" id="minimizePauseExtensionPanelBtn">_</button>
@@ -107,6 +111,7 @@
     </div>
     <button id="setupNextButton" class="primary_btn" style="display: none;">Next</button>
   </div>
+  <button onClick="restart()">Test</button>
   <script src="./JS/setupHelper.js"></script>
   <script src="./JS/main.js"></script>
   <!-- because inline js is not allowed-->

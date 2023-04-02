@@ -66,21 +66,23 @@ input {
 }
 
 #hiddenSettingsPanel {
-    height: 80px;
-    width: 50px;
-    background-color: var(--secondColor);
-    transform: translateY(-242%);
+    height: 30px;
+    overflow-y: hidden;
     position: absolute;
-    right: 5px;
+    right: 0;
     top: 0;
     display: grid;
-    padding: 10px 0;
-    transition: transform .2s;
+    margin: 1rem;
     border-radius: 8px;
+    transition: all .2s;
 }
 
-#hiddenSettingsPanel:hover{
-    transform: translateY(-160%);
+#hiddenSettingsPanel img{
+    filter: invert(1);
+}
+
+#hiddenSettingsPanel:hover {
+    height: 80px;
 }
 
 #arrowDown {
@@ -217,4 +219,12 @@ input {
     right: 10px;
     top: 10px;
     font-size: 1.4rem;
+}
+
+#nextBreakTime {
+    color: var(--primColor);
+}
+
+#nextBtn {
+    margin-left: 60%;
 }
