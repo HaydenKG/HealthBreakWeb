@@ -31,9 +31,7 @@ const minimizePausePanelBtn = document.getElementById(
 );
 const setPauseExtBtn = document.getElementById('setPauseExtBtn');
 
-const breahtingIndicator = document.getElementsByClassName(
-  'breathingIndicatorBar'
-)[0];
+const breahtingIndicator = document.getElementById('breathingIndicatorBar');
 const pauseExtensionPanel = document.getElementById('pauseExtensionPanel');
 
 let userSetupData = JSON.parse(localStorage.getItem('exerciseSelection'));
@@ -47,7 +45,7 @@ function restart() {
   nextCounter = 0;
   contentContainer.scrollTo(nextCounter * contentContainer.clientWidth, 0);
   nextBtn.onclick = () => scrollToNextSection();
-  nextBtn.innerText = 'next';
+  nextBtn.firstElementChild.setAttribute("src", "./media/images/NextArrow.svg");
 }
 
 function scrollToNextSection() {
@@ -56,7 +54,7 @@ function scrollToNextSection() {
 
   contentContainer.scrollTo(nextCounter * contentContainer.clientWidth, 0);
   if (nextCounter == optionsCount) {
-    nextBtn.innerText = 'restart';
+    nextBtn.firstElementChild.setAttribute("src", "./media/images/restart_alt_MaterialIcon.svg");
     nextBtn.onclick = () => restart();
     document.getElementById('nextBreakTime').innerText = getNextBreakTime();
   }
@@ -83,9 +81,9 @@ if (exerciseSelection == null) {
 function getNextBreakTime() {
   const expectedTime = new Date();
   expectedTime.setMinutes(
-    expectedTime.getMinutes() + userSetupData.notificationInterval / 60000
+    expectedTime.getMinutes() + userSetupData.notificationInterval / 1000
   );
-  return `${expectedTime.getHours()}:${expectedTime.getMinutes()}`;
+  return new Intl.DateTimeFormat("default", {hour: "numeric", minute: "numeric"}).format(expectedTime);
 }
 
 settingsBtn.addEventListener('click', () =>
@@ -104,7 +102,7 @@ document
       this.previousElementSibling.innerText += '\n\n Perfect 😊';
       this.style.display = 'none';
       new Audio('./media/sounds/ShadowSoft.wav').play();
-    }, 2000);
+    }, 20000);
     this.setAttribute('disabled', '');
   });
 
@@ -120,7 +118,9 @@ document
         if (
           breathingCounter == 1 ||
           breathingCounter == 9 ||
-          breathingCounter == 18
+          breathingCounter == 18 || 
+          breathingCounter == 27
+
         ) {
           currentAudio = new Audio('./media/sounds/InhaleLofiPiano.wav');
           currentAudio.play();
@@ -128,12 +128,13 @@ document
         if (
           breathingCounter == 3 ||
           breathingCounter == 12 ||
-          breathingCounter == 21
+          breathingCounter == 21 ||
+          breathingCounter == 30
         ) {
           currentAudio = new Audio('./media/sounds/ExhaleLofiPiano.wav');
           currentAudio.play();
         }
-        if (breathingCounter >= 9 * 5) resetBreathing(this);
+        if (breathingCounter >= 9 * 4) resetBreathing(this);
       }, 1000);
 
       //TODO: replace with stop for now because it causes too much trouble syncing the css animation with the sound after a pause

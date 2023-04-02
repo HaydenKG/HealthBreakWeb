@@ -143,7 +143,7 @@ input {
     border: 2px solid var(--primColor);
     border-radius: 8px;
     color: var(--primColor);
-    padding: 5px 10px;
+    padding: 3px 10px;
     background: none;
     transition: all .3s;
     font-size: 1.2rem;
@@ -167,27 +167,36 @@ input {
     margin: 5px;
 }
 
-.breathingIndicatorBar {
-    background-color: var(--primColor);
+#breathingIndicatorContainer {
+    border: solid #f1f1f1 3px;
     height: 10px;
     margin: 5px 0 15px 0;
-    width: 50px;
+    width: 60%;
     border-radius: 8px;
-    animation: breathingCycle 9s 5 linear;
+    display: flex;
+    justify-content: center;
+}
+
+#breathingIndicatorBar {
+    background-color: var(--primColor);
+    height: 100%;
+    width: 30%;
+    border-radius: 4px;
+    animation: breathingCycle 9s 4 linear;
     animation-play-state: paused;
 }
 
 @keyframes breathingCycle {
     0% {
-        width: 50px;
+        width: 30%;
     }
 
     33% {
-        width: 150px;
+        width: 100%;
     }
 
     100% {
-        width: 50px;
+        width: 30%;
     }
 }
 
@@ -227,4 +236,14 @@ input {
 
 #nextBtn {
     margin-left: 60%;
+    top: 50%;
+    position: absolute;
+    filter: saturate(.0);
+    transition: filter linear .3s;
+}
+#nextBtn:hover {
+    filter: saturate(.8);
+}
+#nextBtn:active {
+    filter: saturate(1);
 }

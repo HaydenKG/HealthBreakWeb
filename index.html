@@ -10,12 +10,13 @@
 </head>
 
 <body>
+  <div id="hiddenSettingsPanel">
+    <img class="settingsBtn" id="settingsIcon" title="Settings" src="./media/images/settingsIcon.png" \>
+    <img class="settingsBtn" id="pauseExtensionIcon" title="Pause extension" src="./media/images/pauseIcon.png" \>
+  </div>
+  <button onClick="scrollToNextSection()" class="secondary_btn" id="nextBtn"><img src="./media/images/NextArrow.svg"/></button>
   <main>
-    <div id="hiddenSettingsPanel">
-      <img class="settingsBtn" id="settingsIcon" title="Settings" src="./media/images/settingsIcon.png" \>
-      <img class="settingsBtn" id="pauseExtensionIcon" title="Pause extension" src="./media/images/pauseIcon.png" \>
-    </div>
-    <h3 id="heading">👋 Need a break?</h3>
+    <h2 id="heading">👋 Need a break?</h2>
     <div class="slidingContainer">
       <div class="contentPanel" id="eyeClose">
         <p>Close your eyes for the duration of a deep breath</p>
@@ -26,7 +27,7 @@
       </div>
       <div class="contentPanel" id="breathingCycle">
         <p>Up for a 1:2 (inhale:exhale) breathing cycle?</p>
-        <div class="breathingIndicatorBar"></div>
+        <div id="breathingIndicatorContainer"><div id="breathingIndicatorBar"></div></div>
         <button class="primary_btn" id="breathingCycleBtn">Start</button>
       </div>
       <div class="contentPanel" id="wristShake">
@@ -46,11 +47,10 @@
         <p>Your next break time is at <span id="nextBreakTime">-</span></p>
       </div>
     </div>
-    <button onClick="scrollToNextSection()" class="primary_btn" id="nextBtn">Next</button>
   </main>
   <div id="pauseExtensionPanel" class="hiddenPanel">
     <button class="secondary_btn" id="minimizePauseExtensionPanelBtn">_</button>
-    <h3>Pause <span>Health</span> break</h3>
+    <h2>Pause <span>Health</span> break</h2>
     For
     <form id="pauseExtensionForm">
       <label>60 min</label>
@@ -63,7 +63,7 @@
     <button class="secondary_btn" id="setPauseExtBtn">set</button>
   </div>
   <div id="setupPanel" class="hiddenPanel showPanel">
-    <h3>Welcome to the setup of <br><span>Health</span> break</h3>
+    <h2>Welcome to the setup of <br><span>Health</span> break</h2>
     <div class="slidingContainer">
       <div class="contentPanel">
         <p>Do you want to customize the extension?</p>
@@ -111,7 +111,7 @@
     </div>
     <button id="setupNextButton" class="primary_btn" style="display: none;">Next</button>
   </div>
-  <button onClick="restart()">Test</button>
+  <button onClick="restart()" style="display: none;">Test</button>
   <script src="./JS/setupHelper.js"></script>
   <script src="./JS/main.js"></script>
   <!-- because inline js is not allowed-->
