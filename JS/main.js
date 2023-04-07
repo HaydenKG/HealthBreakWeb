@@ -11,6 +11,7 @@ let breathingCounter = 0;
 let breathingTimer;
 let paused = false;
 let currentAudio;
+let soundEnabled = false;
 
 const contentContainer = document.getElementsByClassName('slidingContainer')[0];
 const options = new Map();
@@ -33,7 +34,10 @@ const setPauseExtBtn = document.getElementById('setPauseExtBtn');
 
 const breahtingIndicator = document.getElementById('breathingIndicatorBar');
 const pauseExtensionPanel = document.getElementById('pauseExtensionPanel');
+const soundOffIcon = document.getElementById("soundOffIcon");
+const soundOnIcon = document.getElementById("soundOnIcon");
 
+soundOffIcon.style.display = "none"
 let userSetupData = JSON.parse(localStorage.getItem('exerciseSelection'));
 // let exerciseSelectionTest = [{eyeClose: true}, {eyeDistance: true}, {breathingCycle: true}, {wristShake: true}];
 let exerciseSelection = userSetupData?.selection;
@@ -64,8 +68,14 @@ if (exerciseSelection == null) {
   showSetupPanel(true);
 } else {
   showSetupPanel(false);
-  //trigger notification
   notificationIntervall = setInterval(() => {
+    if(soundEnabled){
+      try{
+        new Audio("./media/sounds/ShadowSoft.wav").play();
+      } catch (err){
+        console.warn("Could not play notifcation sound because there was no initial interaction with the DOM");
+      }
+    }
     console.log('Interval called');
     document.title = 'Break time 🌿';
   }, userSetupData.notificationInterval);
@@ -83,33 +93,33 @@ function getNextBreakTime() {
   expectedTime.setMinutes(
     expectedTime.getMinutes() + userSetupData.notificationInterval / 1000
   );
-  return new Intl.DateTimeFormat("default", {hour: "numeric", minute: "numeric"}).format(expectedTime);
+  return new Intl.DateTimeFormat("default", {hour: "numeric", minute: "numeric", hour12: false}).format(expectedTime);
 }
 
-settingsBtn.addEventListener('click', () =>
-  console.log('TODO: settings to be implemented')
-);
-pauseBtn.addEventListener('click', () => showPauseExtensionPanel(true));
-minimizePausePanelBtn.addEventListener('click', () =>
-  showPauseExtensionPanel(false)
-);
-setPauseExtBtn.addEventListener('click', () => pauseExtension());
+function setSound(soundShallBeOn){
+  if(soundShallBeOn){
+    soundOffIcon.style.display ="none";
+    soundOnIcon.style.display ="block";
+  } else {
+    soundOffIcon.style.display ="block";
+    soundOnIcon.style.display ="none";
+  }
+  soundEnabled = soundShallBeOn;
+}
 
-document
-  .getElementById('lookDistanceTimerBtn')
-  .addEventListener('click', function () {
-    setTimeout(() => {
-      this.previousElementSibling.innerText += '\n\n Perfect 😊';
-      this.style.display = 'none';
-      new Audio('./media/sounds/ShadowSoft.wav').play();
-    }, 20000);
-    this.setAttribute('disabled', '');
-  });
+function eyeDistanceTimer(button) {
+  setTimeout(() => {
+    button.previousElementSibling.innerText += "\n\n Perfect 😊";
+    button.style.display = "none";
+    if(soundEnabled){
+      new Audio("./media/sounds/ShadowSoft.wav").play();
+    }
+  }, 20000);
+  button.setAttribute("disabled", "");
+}
 
-document
-  .getElementById('breathingCycleBtn')
-  .addEventListener('click', function () {
-    breathingCycleOn = !breathingCycleOn;
+function breathingCycleTimer(button){
+   breathingCycleOn = !breathingCycleOn;
     if (breathingCycleOn) {
       breathingTimer = setInterval(() => {
         if (paused) return;
@@ -122,8 +132,10 @@ document
           breathingCounter == 27
 
         ) {
-          currentAudio = new Audio('./media/sounds/InhaleLofiPiano.wav');
-          currentAudio.play();
+          if(soundEnabled){
+            currentAudio = new Audio('./media/sounds/InhaleLofiPiano.wav');
+            currentAudio.play();
+          }
         }
         if (
           breathingCounter == 3 ||
@@ -131,23 +143,25 @@ document
           breathingCounter == 21 ||
           breathingCounter == 30
         ) {
-          currentAudio = new Audio('./media/sounds/ExhaleLofiPiano.wav');
-          currentAudio.play();
+          if(soundEnabled){
+            currentAudio = new Audio('./media/sounds/ExhaleLofiPiano.wav');
+            currentAudio.play();
+          }
         }
-        if (breathingCounter >= 9 * 4) resetBreathing(this);
+        if (breathingCounter >= 9 * 4) resetBreathing(button);
       }, 1000);
 
       //TODO: replace with stop for now because it causes too much trouble syncing the css animation with the sound after a pause
-      this.innerText = 'Pause'; // TODO: replace with icons
+      button.innerText = 'Pause'; // TODO: replace with icons
       breahtingIndicator.style.animationPlayState = 'running';
       paused = false;
     } else {
-      this.innerText = 'Go';
+      button.innerText = 'Go';
       breahtingIndicator.style.animationPlayState = 'paused';
       currentAudio.pause();
       paused = true;
     }
-  });
+}
 
 function pauseExtension() {
   let durationToClose = new FormData(

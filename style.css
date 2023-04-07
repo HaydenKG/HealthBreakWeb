@@ -66,23 +66,32 @@ input {
 }
 
 #hiddenSettingsPanel {
-    height: 30px;
+    height: 36px;
     overflow-y: hidden;
     position: absolute;
     right: 0;
     top: 0;
     display: grid;
     margin: 1rem;
-    border-radius: 8px;
     transition: all .2s;
 }
 
-#hiddenSettingsPanel img{
-    filter: invert(1);
+#hiddenSettingsPanel:hover {
+    height: 108px;
 }
 
-#hiddenSettingsPanel:hover {
-    height: 80px;
+#settingsIcon{
+    filter: brightness(0) !important;
+}
+
+#hiddenSettingsPanel svg {
+    filter: brightness(0);
+}
+#hiddenSettingsPanel svg:hover {
+    filter: brightness(.8);
+}
+#hiddenSettingsPanel:active {
+    filter: brightness(1);
 }
 
 #arrowDown {
@@ -104,7 +113,6 @@ input {
     justify-self: center;
     align-self: center;
     width: 30px;
-    height: auto;
     cursor: pointer;
 }
 
@@ -225,9 +233,24 @@ input {
 
 #minimizePauseExtensionPanelBtn {
     position: absolute;
-    right: 10px;
-    top: 10px;
-    font-size: 1.4rem;
+    right: 0;
+    top: 0;
+    margin: 1rem;
+    height: 36px;
+    padding: 0;
+}
+
+#minimizePauseExtensionPanelBtn svg{
+    filter: brightness(0);
+    transition: all .2s;
+}
+
+#minimizePauseExtensionPanelBtn svg:hover{
+    filter: brightness(.8);
+}
+
+#minimizePauseExtensionPanelBtn svg:active{
+    filter: brightness(1);
 }
 
 #nextBreakTime {
