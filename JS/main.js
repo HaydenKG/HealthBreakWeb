@@ -122,7 +122,13 @@ function eyeDistanceTimer(button) {
     if (soundEnabled) {
       new Audio("./media/sounds/ShadowSoft.wav").play();
     }
-  }, 20000);
+    setTimeout(() => {
+      button.previousElementSibling.innerText =
+        "Look into the distance for 20 seconds and follow an object with your eyes if you can";
+      button.style.display = "block";
+      button.disabled = false;
+    }, 3000);
+  }, 2000);
   button.setAttribute("disabled", "");
 }
 
@@ -130,31 +136,36 @@ function breathingCycleTimer(button) {
   let breathingCounter = 0;
   let inhaleAudio = new Audio("./media/sounds/InhaleLofiPiano.wav");
   let exhaleAudio = new Audio("./media/sounds/ExhaleLofiPiano.wav");
-  breathingTimer = setInterval(() => {
-    breahtingIndicator.classList.add("breathingAnimation");
-    breathingCounter++;
-    if (
-      breathingCounter == 1 ||
-      breathingCounter == 10 ||
-      breathingCounter == 19 ||
-      breathingCounter == 28
-    ) {
-      if (soundEnabled) {
-        inhaleAudio.play();
+  breathingTimer = setInterval(
+    () => {
+      breahtingIndicator.classList.add("breathingAnimation");
+      breathingCounter++;
+      if (
+        breathingCounter == 1 ||
+        breathingCounter == 10 ||
+        breathingCounter == 19 ||
+        breathingCounter == 28
+      ) {
+        if (soundEnabled) {
+          inhaleAudio.play();
+        }
       }
-    }
-    if (
-      breathingCounter == 4 ||
-      breathingCounter == 13 ||
-      breathingCounter == 22 ||
-      breathingCounter == 31
-    ) {
-      if (soundEnabled) {
-        exhaleAudio.play();
+      if (
+        breathingCounter == 4 ||
+        breathingCounter == 13 ||
+        breathingCounter == 22 ||
+        breathingCounter == 31
+      ) {
+        if (soundEnabled) {
+          exhaleAudio.play();
+        }
       }
-    }
-    if (breathingCounter >= 38) resetBreathing(button);
-  }, 1000, inhaleAudio, exhaleAudio);
+      if (breathingCounter >= 38) resetBreathing(button);
+    },
+    1000,
+    inhaleAudio,
+    exhaleAudio
+  );
 
   button.innerText = "Stop"; // TODO: replace with icons
   button.onclick = () => {
@@ -209,10 +220,4 @@ function showPauseExtensionPanel(show) {
   } else {
     pauseExtensionPanel.classList.remove("showPanel");
   }
-}
-
-function closeWindow() {
-  nextCounter = 0;
-  headingChanged = false;
-  //IDEA: Close tab?
 }
