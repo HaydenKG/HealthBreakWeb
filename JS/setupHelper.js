@@ -44,27 +44,26 @@ function showSetupPanel(show) {
   if (show) setupExtensionPanel.classList.add("showPanel");
   else {
     setupExtensionPanel.classList.remove("showPanel");
-    console.log("Setup comleted");
   }
 }
 
 function saveSetup() {
   const selectionFormData = document.getElementById("exerciseSelection");
   setupDataInstance.selection = getSelection(selectionFormData);
-  setupDataInstance.notificationInterval = new FormData(
-    document.getElementById("intervalSetup")
-  ).get("interval") * 60000;
+  setupDataInstance.notificationInterval =
+    new FormData(document.getElementById("intervalSetup")).get("interval") *
+    60000;
   setupDataInstance.notificationType = new FormData(
     document.getElementById("notificationSetup")
   ).get("notification");
   console.log(JSON.stringify(setupDataInstance));
   localStorage.setItem("exerciseSelection", JSON.stringify(setupDataInstance));
-  
+
   //show main window and enable notification
-//   setNotification(
-//     setupDataInstance.notificationInterval,
-//     setupDataInstance.notificationType
-//   );
+  //   setNotification(
+  //     setupDataInstance.notificationInterval,
+  //     setupDataInstance.notificationType
+  //   );
 }
 
 function getSelection(dataSet) {

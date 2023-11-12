@@ -223,3 +223,8 @@ function showPauseExtensionPanel(show) {
     pauseExtensionPanel.classList.remove("showPanel");
   }
 }
+
+function resetApplication() {
+  localStorage.clear();
+  location.reload();
+}
