@@ -5,7 +5,6 @@
 "use strict";
 
 let nextCounter = 0;
-let headingChanged = false;
 let breathingCycleOn = false;
 let breathingTimer;
 let paused = false;
@@ -54,8 +53,8 @@ function startInterval() {
     if (soundEnabled) {
       try {
         new Audio("./media/sounds/ShadowSoft.wav").play();
-        changeHeading(true);
         restart();
+        changeHeading(true);
       } catch (err) {
         console.warn(
           "Could not play notifcation sound because there was no initial interaction with the DOM"
@@ -68,7 +67,7 @@ function startInterval() {
 
 function scrollToNextSection() {
   if (nextCounter < optionsCount) nextCounter++;
-  if (nextCounter > 0 && !headingChanged) changeHeading(false);
+  if (nextCounter > 0) changeHeading(false);
 
   contentContainer.scrollTo(nextCounter * contentContainer.clientWidth, 0);
   if (nextCounter == optionsCount) {
@@ -130,7 +129,7 @@ function eyeDistanceTimer(button) {
       button.style.display = "block";
       button.disabled = false;
     }, 3000);
-  }, 2000);
+  }, 20000);
   button.setAttribute("disabled", "");
 }
 
@@ -212,13 +211,9 @@ function pauseExtension() {
 }
 
 function changeHeading(showNeedBreakQuestion) {
-  if (showNeedBreakQuestion) {
-    document.getElementById("heading").innerHTML = "👋 Need a break?";
-  } else {
-    document.getElementById("heading").innerHTML =
-      "🌿<span>Health</span> break";
-  }
-  headingChanged = true;
+  document.getElementById("heading").innerHTML = showNeedBreakQuestion
+    ? "👋 Need a break?"
+    : "🌿<span>Health</span> break";
 }
 
 function showPauseExtensionPanel(show) {
