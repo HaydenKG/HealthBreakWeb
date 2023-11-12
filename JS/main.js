@@ -130,7 +130,7 @@ function eyeDistanceTimer(button) {
       button.style.display = "block";
       button.disabled = false;
     }, 3000);
-  }, 2000);
+  }, 20000);
   button.setAttribute("disabled", "");
 }
 
