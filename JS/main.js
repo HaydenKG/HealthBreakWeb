@@ -54,6 +54,8 @@ function startInterval() {
     if (soundEnabled) {
       try {
         new Audio("./media/sounds/ShadowSoft.wav").play();
+        changeHeading(true);
+        restart();
       } catch (err) {
         console.warn(
           "Could not play notifcation sound because there was no initial interaction with the DOM"
@@ -66,7 +68,7 @@ function startInterval() {
 
 function scrollToNextSection() {
   if (nextCounter < optionsCount) nextCounter++;
-  if (nextCounter > 0 && !headingChanged) changeHeading();
+  if (nextCounter > 0 && !headingChanged) changeHeading(false);
 
   contentContainer.scrollTo(nextCounter * contentContainer.clientWidth, 0);
   if (nextCounter == optionsCount) {
@@ -209,8 +211,13 @@ function pauseExtension() {
   showPauseExtensionPanel(false);
 }
 
-function changeHeading() {
-  document.getElementById("heading").innerHTML = "🌿<span>Health</span> break";
+function changeHeading(showNeedBreakQuestion) {
+  if (showNeedBreakQuestion) {
+    document.getElementById("heading").innerHTML = "👋 Need a break?";
+  } else {
+    document.getElementById("heading").innerHTML =
+      "🌿<span>Health</span> break";
+  }
   headingChanged = true;
 }
 
